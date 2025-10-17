@@ -7,7 +7,7 @@ function App() {
     const [view, setView] = useState("home"); // home / projects / contact
 
     useEffect(() => {
-        fetch("http://localhost:5000/projects") // sau URL backend live
+        fetch("https://consulting-backend-oqzo.onrender.com/api/projects")
             .then(res => res.json())
             .then(data => setProjects(data))
             .catch(err => console.error(err));
