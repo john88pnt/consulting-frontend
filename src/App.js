@@ -1,45 +1,57 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import hero from "./assets/hero.jpg"; // import hero din src/assets
 
 function App() {
     const [projects, setProjects] = useState([]);
-    const [showProjects, setShowProjects] = useState(false);
+    const [view, setView] = useState("home"); // home / projects / contact
 
     useEffect(() => {
-        fetch("https://consultrobotics-backend.onrender.com/projects")
-
-            .then((res) => res.json())
-            .then((data) => setProjects(data))
-            .catch((err) => console.error(err));
+        fetch("http://localhost:5000/projects") // sau URL backend live
+            .then(res => res.json())
+            .then(data => setProjects(data))
+            .catch(err => console.error(err));
     }, []);
 
     return (
-        <div className="App">
-            <header className="hero">
+        <div>
+            <div
+                className="hero"
+                style={{
+                    backgroundImage: `url(${hero})`,
+                }}
+            >
                 <h1>Consult Robotics</h1>
-                <p>Consultanță și integrare roboți industriali ABB și KUKA</p>
-            </header>
+                <p>
+                    Servicii de consultanță în integrare și programare roboți industriali
+                    KUKA și ABB
+                </p>
+                <nav>
+                    <button onClick={() => setView("projects")}>Proiecte</button>
+                    <button onClick={() => setView("contact")}>Contact</button>
+                </nav>
+            </div>
 
-            <nav className="menu">
-                <button onClick={() => setShowProjects(!showProjects)}>Proiecte</button>
-                <button onClick={() => alert("Oferim servicii B2B în integrare și programare roboți industriali ABB și KUKA")}>Servicii</button>
-                <button onClick={() => alert("Contact: pantea.ionut@yahoo.com | Bistrița | 0746928120")}>Contact</button>
-            </nav>
-
-            {showProjects && (
-                <section className="projects">
-                    {projects.map((p, idx) => (
-                        <div className="project" key={idx}>
+            {view === "projects" && (
+                <div className="projects-container">
+                    {projects.map((p, index) => (
+                        <div key={index} className="project-card">
                             <img src={p.image} alt={p.title} />
                             <h3>{p.title}</h3>
                             <p>{p.description}</p>
-                            <details>
-                                <summary>Detalii</summary>
-                                <p>{p.longDescription}</p>
-                            </details>
+                            <p>{p.longDescription}</p>
                         </div>
                     ))}
-                </section>
+                </div>
+            )}
+
+            {view === "contact" && (
+                <div className="contact-section">
+                    <h2>Contact</h2>
+                    <p>Email: pantea.ionut@yahoo.com</p>
+                    <p>Telefon: 0746928120</p>
+                    <p>Locație: Bistrița</p>
+                </div>
             )}
         </div>
     );
