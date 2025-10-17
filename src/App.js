@@ -7,7 +7,7 @@ function App() {
     const [view, setView] = useState("home"); // home / projects / contact
 
     useEffect(() => {
-        fetch("https://consulting-backend-oqzo.onrender.com/api/projects")
+        fetch("https://consulting-backend-oqzo.onrender.com/projects")
             .then(res => res.json())
             .then(data => setProjects(data))
             .catch(err => console.error(err));
