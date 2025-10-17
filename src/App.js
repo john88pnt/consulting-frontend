@@ -1,58 +1,80 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import hero from "./assets/hero.jpg"; // import hero din src/assets
+import hero from "./assets/hero.jpg";
 
 function App() {
     const [projects, setProjects] = useState([]);
-    const [view, setView] = useState("home"); // home / projects / contact
+    const [activeSection, setActiveSection] = useState("projects");
+    const [selectedProject, setSelectedProject] = useState(null);
 
     useEffect(() => {
         fetch("https://consulting-backend-oqzo.onrender.com/projects")
-            .then(res => res.json())
-            .then(data => setProjects(data))
-            .catch(err => console.error(err));
+            .then((res) => res.json())
+            .then((data) => setProjects(data))
+            .catch((err) => console.error(err));
     }, []);
 
     return (
-        <div>
-            <div
-                className="hero"
-                style={{
-                    backgroundImage: `url(${hero})`,
-                }}
-            >
+        <div className="App">
+            <header className="hero">
                 <h1>Consult Robotics</h1>
-                <p>
-                    Servicii de consultanță în integrare și programare roboți industriali
-                    KUKA și ABB
-                </p>
-                <nav>
-                    <button onClick={() => setView("projects")}>Proiecte</button>
-                    <button onClick={() => setView("contact")}>Contact</button>
-                </nav>
-            </div>
+                <p>Consultanță și integrare roboți industriali KUKA și ABB</p>
+            </header>
 
-            {view === "projects" && (
-                <div className="projects-container">
-                    {projects.map((p, index) => (
-                        <div key={index} className="project-card">
-                            <img src={p.image} alt={p.title} />
-                            <h3>{p.title}</h3>
-                            <p>{p.description}</p>
-                            <p>{p.longDescription}</p>
+            <nav className="menu">
+                <button onClick={() => setActiveSection("projects")}>Proiecte</button>
+                <button onClick={() => setActiveSection("services")}>Servicii</button>
+                <button onClick={() => setActiveSection("contact")}>Contact</button>
+            </nav>
+
+            <main>
+                {activeSection === "projects" && (
+                    <div className="projects">
+                        {projects.map((p, index) => (
+                            <div className="project-card" key={index}>
+                                <img src={p.image} alt={p.title} />
+                                <h3>{p.title}</h3>
+                                <p>{p.description}</p>
+                                <button onClick={() => setSelectedProject(p)}>Detalii</button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {selectedProject && (
+                    <div className="modal" onClick={() => setSelectedProject(null)}>
+                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                            <h2>{selectedProject.title}</h2>
+                            <p>{selectedProject.longDescription}</p>
+                            <button onClick={() => setSelectedProject(null)}>Închide</button>
                         </div>
-                    ))}
-                </div>
-            )}
+                    </div>
+                )}
 
-            {view === "contact" && (
-                <div className="contact-section">
-                    <h2>Contact</h2>
-                    <p>Email: pantea.ionut@yahoo.com</p>
-                    <p>Telefon: 0746928120</p>
-                    <p>Locație: Bistrița</p>
-                </div>
-            )}
+                {activeSection === "services" && (
+                    <div className="services">
+                        <h2>Servicii Consult Robotics</h2>
+                        <p>
+                            Oferim servicii de consultanță în integrare și programare roboți
+                            industriali KUKA și ABB. Soluții personalizate pentru optimizarea
+                            proceselor industriale și creșterea productivității.
+                        </p>
+                    </div>
+                )}
+
+                {activeSection === "contact" && (
+                    <div className="contact">
+                        <h2>Contact</h2>
+                        <p>Email: pantea.ionut@yahoo.com</p>
+                        <p>Telefon: 0746 928 120</p>
+                        <p>Locație: Bistrița</p>
+                    </div>
+                )}
+            </main>
+
+            <footer>
+                <p>© 2025 Consult Robotics</p>
+            </footer>
         </div>
     );
 }

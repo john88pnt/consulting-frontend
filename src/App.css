@@ -1,65 +1,104 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
+/* Hero section */
 .hero {
     height: 60vh;
+    background-image: url("./assets/hero.jpg");
     background-size: cover;
     background-position: center;
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: white;
-    text-shadow: 2px 2px 4px #000;
     text-align: center;
 }
 
-nav {
-    margin-top: 20px;
+.menu {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
 }
 
-button {
-    margin: 5px;
+.menu button {
     padding: 10px 20px;
-    font-size: 16px;
+    margin: 0 10px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.projects-container {
+.menu button:hover {
+    background-color: #0051a2;
+}
+
+.projects {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 20px;
+    gap: 20px;
 }
 
 .project-card {
-    width: 300px;
-    border: 1px solid #ccc;
-    margin: 10px;
-    border-radius: 8px;
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     overflow: hidden;
     text-align: center;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    padding: 10px;
+    background-color: #f9f9f9;
 }
 
 .project-card img {
     width: 100%;
-    height: 200px;
+    height: 150px;
     object-fit: cover;
 }
 
-.project-card h3 {
-    margin: 10px 0 5px 0;
+.project-card button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #00aaff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.project-card p {
-    padding: 0 10px 10px 10px;
-    font-size: 14px;
+.project-card button:hover {
+    background-color: #0077aa;
 }
 
-.contact-section {
+.services, .contact {
+    max-width: 800px;
+    margin: 20px auto;
     text-align: center;
-    margin: 40px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #f1f1f1;
+    margin-top: 40px;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
 }
