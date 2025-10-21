@@ -102,3 +102,29 @@ footer {
     width: 80%;
     max-width: 500px;
 }
+.hero {
+    background: linear-gradient(135deg, #1a1a1a, #333);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero-subtitle {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    color: #ddd;
+}
+
+.hero .tagline {
+    font-size: 1.2rem;
+    margin-top: 8px;
+    color: #f0f0f0;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 30px;
+}
