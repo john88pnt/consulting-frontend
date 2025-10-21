@@ -1,130 +1,108 @@
-/* Hero section */
+/* RESETEAZĂ STILURILE DE BAZĂ */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #222;
+}
+
+/* HERO SECTION */
 .hero {
-    height: 60vh;
-    background-image: url("./assets/hero.jpg");
+    height: 70vh;
+    background-image: url('./assets/hero.jpg');
     background-size: cover;
     background-position: center;
-    color: white;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-content h2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+}
+
+.hero-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* PROJECTS */
+.projects {
+    padding: 3rem 1rem;
+    background-color: #fff;
     text-align: center;
 }
 
-.menu {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
+.projects h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
 }
 
-.menu button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.menu button:hover {
-    background-color: #0051a2;
-}
-
-.projects {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    justify-items: center;
 }
 
 .project-card {
-    width: 250px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    text-align: center;
-    padding: 10px;
-    background-color: #f9f9f9;
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 340px;
 }
 
 .project-card img {
     width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
-
-.project-card button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #00aaff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.project-card button:hover {
-    background-color: #0077aa;
-}
-
-.services, .contact {
-    max-width: 800px;
-    margin: 20px auto;
-    text-align: center;
-}
-
-footer {
-    text-align: center;
-    padding: 20px 0;
-    background-color: #f1f1f1;
-    margin-top: 40px;
-}
-
-/* Modal */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
     border-radius: 10px;
-    width: 80%;
-    max-width: 500px;
 }
-.hero {
-    background: linear-gradient(135deg, #1a1a1a, #333);
+
+.project-card h3 {
+    margin: 0.8rem 0 0.4rem;
+}
+
+.project-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+/* CONTACT SECTION */
+.contact {
+    background-color: #007bff;
     color: white;
     text-align: center;
-    padding: 80px 20px;
+    padding: 2rem 1rem;
 }
 
-.hero-subtitle {
-    font-size: 1.4rem;
-    margin-top: 10px;
-    color: #ddd;
+.contact a {
+    color: #ffeb3b;
+    text-decoration: none;
 }
 
-.hero .tagline {
-    font-size: 1.2rem;
-    margin-top: 8px;
-    color: #f0f0f0;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-}
-
-.loading {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #555;
-    margin-top: 30px;
+.contact a:hover {
+    text-decoration: underline;
 }
