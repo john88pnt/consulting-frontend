@@ -1,96 +1,37 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import hero from "./assets/hero.jpg";
+async function loadProjects() {
+    const container = document.getElementById("projects-container");
+    container.innerHTML = "<p class='loading-msg'>Se încarcă proiectele...</p>";
 
-function App() {
-    const [view, setView] = useState("home");
-    const [projects, setProjects] = useState([]);
-    const [loading, setLoading] = useState(false);
+    try {
+        const response = await fetch("/api/projects");
+        const projects = await response.json();
 
-    const handleShowProjects = () => {
-        setView("projects");
-        setLoading(true);
+        container.innerHTML = "";
+        projects.forEach(proj => {
+            const projectCard = document.createElement("div");
+            projectCard.classList.add("project-card");
 
-        fetch("https://consulting-backend-oqzo.onrender.com/api/projects")
-            .then((res) => res.json())
-            .then((data) => setProjects(data))
-            .catch((err) => console.error("Eroare la preluarea proiectelor:", err))
-            .finally(() => setLoading(false));
-    };
+            projectCard.innerHTML = `
+        <img src="${proj.image}" alt="${proj.title}">
+        <h3>${proj.title}</h3>
+        <p class="short-desc">${proj.shortDescription}</p>
+        <button class="details-btn">Detalii</button>
+        <div class="long-desc hidden">${proj.longDescription}</div>
+      `;
 
-    return (
-        <div className="App">
-            {/* PAGINA PRINCIPALĂ */}
-            {view === "home" && (
-                <div className="hero" style={{ backgroundImage: `url(${hero})` }}>
-                    <div className="hero-content">
-                        <h1>
-                            Consultanță în integrare și programare roboți industriali KUKA și ABB
-                        </h1>
-                        <div className="buttons">
-                            <button onClick={handleShowProjects}>Proiecte</button>
-                            <button onClick={() => setView("services")}>Servicii</button>
-                            <button onClick={() => setView("contact")}>Contact</button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            container.appendChild(projectCard);
+        });
 
-            {/* PAGINA PROIECTE */}
-            {view === "projects" && (
-                <div className="projects">
-                    <h2>Proiectele noastre</h2>
-                    {loading ? (
-                        <p className="loading-text">Se încarcă proiectele...</p>
-                    ) : (
-                        <div className="project-list">
-                            {projects.map((project) => (
-                                <div key={project.id} className="project-card">
-                                    <img src={project.image} alt={project.title} />
-                                    <h3>{project.title}</h3>
-                                    <p>{project.description}</p>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                    <button className="back-button" onClick={() => setView("home")}>
-                        ← Înapoi
-                    </button>
-                </div>
-            )}
+        document.querySelectorAll(".details-btn").forEach(btn => {
+            btn.addEventListener("click", e => {
+                const card = e.target.closest(".project-card");
+                const desc = card.querySelector(".long-desc");
+                desc.classList.toggle("hidden");
+            });
+        });
 
-            {/* PAGINA SERVICII */}
-            {view === "services" && (
-                <div className="services">
-                    <h2>Serviciile oferite</h2>
-                    <ul>
-                        <li>Programare roboți industriali KUKA și ABB</li>
-                        <li>Integrare sisteme robotizate în linii de producție</li>
-                        <li>Simulare și optimizare procese robotizate (RobotStudio, KUKA.Sim)</li>
-                    </ul>
-                    <button className="back-button" onClick={() => setView("home")}>
-                        ← Înapoi
-                    </button>
-                </div>
-            )}
-
-            {/* PAGINA CONTACT */}
-            {view === "contact" && (
-                <div className="contact">
-                    <h2>Contact</h2>
-                    <p>
-                        Pentru colaborări sau consultanță, ne poți contacta la:<br />
-                        <strong>Email:</strong> pantea.ionut@yahoo.com<br />
-                        <strong>Locație:</strong> Bistrița, România<br />
-                        <strong>Telefon:</strong> 0746928120
-                    </p>
-                    <button className="back-button" onClick={() => setView("home")}>
-                        ← Înapoi
-                    </button>
-                </div>
-            )}
-        </div>
-    );
+    } catch (error) {
+        console.error("Eroare la încărcarea proiectelor:", error);
+        container.innerHTML = "<p>Eroare la încărcarea proiectelor.</p>";
+    }
 }
-
-export default App;
