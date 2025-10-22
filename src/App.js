@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import hero from "./assets/hero.jpg"; // ✅ imaginea hero locală
+import hero from "./assets/hero.jpg";
 
 function App() {
     const [view, setView] = useState("home");
@@ -20,6 +20,7 @@ function App() {
 
     return (
         <div className="App">
+            {/* PAGINA PRINCIPALĂ */}
             {view === "home" && (
                 <div className="hero" style={{ backgroundImage: `url(${hero})` }}>
                     <div className="hero-content">
@@ -28,13 +29,14 @@ function App() {
                         </h1>
                         <div className="buttons">
                             <button onClick={handleShowProjects}>Proiecte</button>
-                            <button>Servicii</button>
-                            <button>Contact</button>
+                            <button onClick={() => setView("services")}>Servicii</button>
+                            <button onClick={() => setView("contact")}>Contact</button>
                         </div>
                     </div>
                 </div>
             )}
 
+            {/* PAGINA PROIECTE */}
             {view === "projects" && (
                 <div className="projects">
                     <h2>Proiectele noastre</h2>
@@ -51,6 +53,37 @@ function App() {
                             ))}
                         </div>
                     )}
+                    <button className="back-button" onClick={() => setView("home")}>
+                        ← Înapoi
+                    </button>
+                </div>
+            )}
+
+            {/* PAGINA SERVICII */}
+            {view === "services" && (
+                <div className="services">
+                    <h2>Serviciile oferite</h2>
+                    <ul>
+                        <li>Programare roboți industriali KUKA și ABB</li>
+                        <li>Integrare sisteme robotizate în linii de producție</li>
+                        <li>Simulare și optimizare procese robotizate (RobotStudio, KUKA.Sim)</li>
+                    </ul>
+                    <button className="back-button" onClick={() => setView("home")}>
+                        ← Înapoi
+                    </button>
+                </div>
+            )}
+
+            {/* PAGINA CONTACT */}
+            {view === "contact" && (
+                <div className="contact">
+                    <h2>Contact</h2>
+                    <p>
+                        Pentru colaborări sau consultanță, ne poți contacta la:<br />
+                        <strong>Email:</strong> pantea.ionut@yahoo.com<br />
+                        <strong>Locație:</strong> Bistrița, România<br />
+                        <strong>Telefon:</strong> 0746928120
+                    </p>
                     <button className="back-button" onClick={() => setView("home")}>
                         ← Înapoi
                     </button>

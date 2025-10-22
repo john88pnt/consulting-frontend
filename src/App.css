@@ -99,3 +99,25 @@ button:hover {
 .back-button:hover {
     background-color: #5a6268;
 }
+
+.services, .contact {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #fff;
+    color: #333;
+}
+
+.services ul {
+    list-style: none;
+    padding: 0;
+}
+
+.services li {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+.contact p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
