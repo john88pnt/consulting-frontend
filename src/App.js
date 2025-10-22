@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import hero from "./assets/hero.jpg"; // ✅ imaginea hero locală
 
 function App() {
     const [view, setView] = useState("home");
@@ -20,9 +21,11 @@ function App() {
     return (
         <div className="App">
             {view === "home" && (
-                <div className="hero">
+                <div className="hero" style={{ backgroundImage: `url(${hero})` }}>
                     <div className="hero-content">
-                        <h1>Consultanță în integrare și programare roboți industriali KUKA și ABB</h1>
+                        <h1>
+                            Consultanță în integrare și programare roboți industriali KUKA și ABB
+                        </h1>
                         <div className="buttons">
                             <button onClick={handleShowProjects}>Proiecte</button>
                             <button>Servicii</button>
@@ -48,6 +51,9 @@ function App() {
                             ))}
                         </div>
                     )}
+                    <button className="back-button" onClick={() => setView("home")}>
+                        ← Înapoi
+                    </button>
                 </div>
             )}
         </div>
